@@ -1,0 +1,36 @@
+group 'com.fliaping.wifi'
+version '0.1'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.BUILD-SNAPSHOT")
+    }
+}
+
+apply plugin: 'jetty'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile 'org.slf4j:slf4j-simple:1.7.20'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
+
+}
