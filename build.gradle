@@ -1,4 +1,4 @@
-group 'com.fliaping.wifi'
+group 'com.fliaping.wifi.auth'
 version '0.1'
 
 buildscript {
@@ -24,12 +24,19 @@ repositories {
     maven { url "http://repo.spring.io/milestone" }
 }
 
+bootRepackage {
+    mainClass = 'com.fliaping.wifi.auth.XpApplication'
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile 'org.slf4j:slf4j-simple:1.7.20'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
-    compile 'org.springframework.boot:spring-boot-starter-web'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.4.0.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.4.0.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.4.0.RELEASE'
+    compile 'org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE'
+    compile 'mysql:mysql-connector-java:6.0.3'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.okhttp:okhttp:2.7.5'
 
