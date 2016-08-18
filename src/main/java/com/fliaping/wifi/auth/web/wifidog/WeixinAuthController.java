@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Payne on 8/3/16.
@@ -89,7 +90,7 @@ public class WeixinAuthController {
             }else { //该用户为新接入
                 user = new User();
 
-                Set clients = new HashSet<Client>();
+                List clients = new ArrayList<Client>();
                 clients.add(client);
 
                 user.setWxOpenId(openId)

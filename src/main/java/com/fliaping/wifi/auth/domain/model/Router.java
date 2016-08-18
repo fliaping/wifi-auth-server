@@ -1,8 +1,11 @@
 package com.fliaping.wifi.auth.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Payne on 8/4/16.
@@ -34,8 +37,12 @@ public class Router implements Serializable{
 
     private String bssid;
 
-    @OneToMany(mappedBy = "router",fetch = FetchType.LAZY)
-    private Set<Session> sessions;
+    @ManyToOne/*(cascade = CascadeType.ALL)*/ //注释掉之后,如果MpShop表中没有该记录不能添加成功
+    @JoinColumn(name = "mp_shop_id"/*,nullable = false*/)
+    private MpShop mpShop;
+
+    @OneToMany(mappedBy = "router")
+    private List<Session> sessions;
 
     @OneToOne(cascade = CascadeType.ALL)
     private LogPing lastPing;
@@ -126,11 +133,11 @@ public class Router implements Serializable{
         return this;
     }
 
-    public Set<Session> getSessions() {
+    public List<Session> getSessions() {
         return sessions;
     }
 
-    public Router setSessions(Set<Session> sessions) {
+    public Router setSessions(List<Session> sessions) {
         this.sessions = sessions;
         return this;
     }
@@ -141,6 +148,15 @@ public class Router implements Serializable{
 
     public Router setLastPing(LogPing lastPing) {
         this.lastPing = lastPing;
+        return this;
+    }
+
+    public MpShop getMpShop() {
+        return mpShop;
+    }
+
+    public Router setMpShop(MpShop mpShop) {
+        this.mpShop = mpShop;
         return this;
     }
 }

@@ -38,7 +38,7 @@ public class ClientServiceImpl implements ClientService {
         }else {
             logger.warn("logoline:"+ logOnline.getId());
             Long fromLastDuration = System.currentTimeMillis() - logOnline.getUpdateTime();
-            int timeout = Integer.parseInt(env.getProperty("wifidog.timeout"));
+            int timeout = Integer.parseInt(env.getProperty("wifidog.online.timeout"));
             logger.warn("wifidog.timeout:"+timeout + " fromLastDuration:"+fromLastDuration + "update:" +logOnline.getUpdateTime());
             if(fromLastDuration > timeout * 1000 ){
                 return false;

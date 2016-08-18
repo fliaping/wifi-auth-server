@@ -9,12 +9,12 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Payne on 8/10/16.
  */
-@Component("dataUsageService")
+@Component("dataQuotaService")
 @Transactional
 public class DataQuotaServiceImpl implements DataQuotaService {
 
@@ -38,7 +38,7 @@ public class DataQuotaServiceImpl implements DataQuotaService {
         if (dataQuota != null){
             long totalQuota = dataQuota.getTotal();
 
-            Set<Client> clients = user.getClients();
+            List<Client> clients = user.getClients();
             long incoming = 0;
             long outgoing = 0;
             for (Client client :

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Payne on 8/4/16.
  */
 @Entity
-@Table(name = "session")
+@Table(name = "session_s")
 public class Session implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -17,13 +17,15 @@ public class Session implements Serializable{
     @GeneratedValue
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id",unique = true)
     private Client client;
 
     private String ip;
 
-    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "router_id")
     private Router router;
 
     @Column(unique = true)

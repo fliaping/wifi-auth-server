@@ -11,8 +11,10 @@ import com.fliaping.wifi.auth.domain.WeixinTicket;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,27 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/login")
 public class LoginController {
 
-    /* 门店名称 : 优拼城际
-          ssid : wifitest
-          shopId : 5761311
-          appId : wxd0380c266c06b53f
-          secretKey : 23a88d8ef2099d059b9f533df2b8876b
-          ----复用demo代码说明----
-          若认证Portal页直接使用此Demo源代码，请注意填写代码中的以下参数（由您的网络环境动态获取）：
-          extend
-          timestamp
-          authUrl
-          mac
-          bssid
-          sign
-          其中sign签名请在后台完成，例如：
-          var toSign = appId + extend + timestamp + shopId + authUrl + mac + ssid + bssid + secretKey;
-          var sign= md5(toSign);*/
-
-    private final long timeout = 3 * 60L;
-
-    WeixinTicket  weixinTicket = new WeixinTicket();
-
     @Autowired
     private SessionRepository sessionRepository;
 
@@ -57,16 +38,13 @@ public class LoginController {
     private ClientRepository clientRepository;
 
     @Autowired
-    private LogOnlineRepository logOnlineRepository;
-
-    @Autowired
-    private DataQuotaRepository dataQuotaRepository;
-
-    @Autowired
     private ClientService clientService;
 
     @Autowired
     private DataQuotaService dataQuotaService;
+
+    @Autowired
+    private Environment environment;
 
     private Logger logger = Logger.getLogger(getClass());
 
@@ -82,13 +60,31 @@ public class LoginController {
                         @RequestParam(value = "url",required = true) String url,
                         @RequestParam(value = "ip",required = true) String ip){
 
+
+        String APP_ID = null;
+        String SHOP_ID = null;
+        String SECRET_KEY = null;
+        String AUTH_URL = null;
+
+
         // 验证gw_id 在路由器列表中,不在则是未配置
         Router router = routerRepository.findByGwId(gw_id);
         if(router == null) return "routerUnconfig"; //路由器未配置,返回配置介绍页
         else { //更新网关wifidog地址端口
             router.setGwAddress(gw_address)
                     .setGwPort(Integer.parseInt(gw_port));
-            routerRepository.save(router);
+            router = routerRepository.save(router);
+
+            //获取微信参数
+            MpShop mpShop = router.getMpShop();
+            Assert.notNull(mpShop,"this router no belonged MpShop ,please check!!");
+            SHOP_ID = mpShop.getShopId();
+            SECRET_KEY = mpShop.getSecretKey();
+            MpApp mpApp = mpShop.getMpApp();
+            Assert.notNull(mpShop,"this router no belonged MpShop ,please check!!");
+            APP_ID = mpApp.getAppId();
+            AUTH_URL = mpApp.getAuthUrl();
+
 
             logger.info("router update");
         }
@@ -159,7 +155,6 @@ public class LoginController {
             client.setFirstUrl(url);
 
             session = new Session(client,router,token);
-            client.setSession(session);
             session.setIp(ip)
                     .setBeginTime(System.currentTimeMillis());
         }
@@ -171,14 +166,15 @@ public class LoginController {
 
 
         //Session session = sessionRepository.findByClientId(client.getId());
+        String extend = token;
+        String ssid = router.getSsid();
+        String bssid = router.getBssid();
 
 
-        weixinTicket.setTimestamp(System.currentTimeMillis()+"")
-                .setMac(mac)
-                .setAuthUrl("http://192.168.1.186:9408/weixinauth/")
-                .setExtend(token)
-                .setSign(toSign(weixinTicket)); //必须在最后,要对前面的属性签名
+        long timestamp = System.currentTimeMillis();
+        WeixinTicket weixinTicket = new WeixinTicket(APP_ID , extend  ,timestamp, SHOP_ID , AUTH_URL , mac , ssid , bssid , SECRET_KEY);
 
+        //appId + extend + timestamp + shopId + authUrl + mac + ssid + bssid + secretKey
 
         model.addAttribute("appId",weixinTicket.getAppId());
         model.addAttribute("extend",weixinTicket.getExtend());
@@ -191,33 +187,8 @@ public class LoginController {
         model.addAttribute("bssid",weixinTicket.getBssid());
 
 
-        //appId, extend, timestamp, sign, shopId, authUrl, mac, ssid, bssid
-
         return "weixinPortal";
     }
 
-    /**
-     * 得到传给微信的签名值
-     * @param weixinTicket 初次传给微信为了得到ticket的参数对象
-     * @return MD5签名值
-     */
-   private String toSign(WeixinTicket weixinTicket){
-        //sign = MD5(appId + extend + timestamp + shop_id + authUrl + mac + ssid + bssid + secretkey);
-        String originString = weixinTicket.getAppId() +
-                weixinTicket.getExtend() +
-                weixinTicket.getTimestamp() +
-                weixinTicket.getShopId() +
-                weixinTicket.getAuthUrl() +
-                weixinTicket.getMac() +
-                weixinTicket.getSsid() +
-                weixinTicket.getBssid() +
-                weixinTicket.getSecretKey();
 
-        //System.out.println("originString: "+ originString);
-
-        String md5 = CodecUtil.MD5(originString);
-        //System.out.println("md5: "+md5);
-
-        return md5;
-    }
 }

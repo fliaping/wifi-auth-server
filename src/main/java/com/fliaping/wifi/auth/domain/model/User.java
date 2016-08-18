@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Payne on 8/4/16.
@@ -39,7 +39,7 @@ public class User implements Serializable{
     private int loginCount;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    private Set<Client> clients;
+    private List<Client> clients;
 
     @Column(columnDefinition = "boolean default false")
     private boolean enable;
@@ -113,11 +113,11 @@ public class User implements Serializable{
         return this;
     }
 
-    public Set<Client> getClients() {
+    public List<Client> getClients() {
         return clients;
     }
 
-    public User setClients(Set<Client> clients) {
+    public User setClients(List<Client> clients) {
         this.clients = clients;
         return this;
     }

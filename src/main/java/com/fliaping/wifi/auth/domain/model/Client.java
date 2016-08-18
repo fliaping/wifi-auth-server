@@ -3,13 +3,14 @@ package com.fliaping.wifi.auth.domain.model;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Payne on 8/4/16.
  */
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,10 +27,6 @@ public class Client {
 
     @Column(length = 1024)
     private String firstUrl;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "session_id")
-    private Session session;
 
     private boolean enable = false;
 
@@ -72,15 +69,6 @@ public class Client {
 
     public Client setFirstUrl(String firstUrl) {
         this.firstUrl = firstUrl;
-        return this;
-    }
-
-    public Session getSession() {
-        return session;
-    }
-
-    public Client setSession(Session session) {
-        this.session = session;
         return this;
     }
 

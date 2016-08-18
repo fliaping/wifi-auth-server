@@ -2,6 +2,8 @@ package com.fliaping.wifi.auth.domain;
 
 
 
+import com.fliaping.wifi.auth.utils.CodecUtil;
+
 import java.io.Serializable;
 
 /**
@@ -20,6 +22,23 @@ public class WeixinTicket implements Serializable {
     private String mac = "aa:aa:aa:aa:aa:aa";
     private String bssid = "ff:ff:ff:ff:ff:ff";
     private String sign = "test";
+
+    public WeixinTicket(String appId , String extend ,long timestamp, String shopId , String authUrl ,
+                        String mac , String ssid , String bssid , String secretKey){
+        this.ssid = ssid;
+        this.shopId = shopId;
+        this.appId = appId;
+        this.secretKey = secretKey;
+        this.extend = extend;
+        this.authUrl = authUrl;
+        this.mac = mac;
+        this.bssid = bssid;
+        this.timestamp = ""+timestamp;
+
+        //得到签名
+        toSign();
+
+    }
 
     public String getSsid() {
         return ssid;
@@ -106,8 +125,14 @@ public class WeixinTicket implements Serializable {
         return this;
     }
 
-    public WeixinTicket setSign(String sign) {
-        this.sign = sign;
-        return this;
+    /**
+     * 得到传给微信的签名值
+     */
+    public void toSign(){
+        //sign = MD5(appId + extend + timestamp + shop_id + authUrl + mac + ssid + bssid + secretkey);
+        String originString = appId + extend + timestamp + shopId + authUrl + mac + ssid + bssid + secretKey;
+
+        //System.out.println("originString: "+ originString);
+        sign = CodecUtil.MD5(originString);
     }
 }
