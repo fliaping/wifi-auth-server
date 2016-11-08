@@ -88,7 +88,7 @@ public class AuthController {
 
         // TODO: 8/5/16 判断是否流量用超,返回认证失败,并将session下线。
         Client client = session.getClient();
-        if(client != null && isAllowConnect(client.getUser())){  //检查允许连接
+        if(client != null && isAllowConnect(client)){  //检查允许连接
             if (stageInt == 0) { //login认证,设置session信息
                 session.setIp(ip)
                         .setLogOnline(logOnline);
@@ -129,8 +129,8 @@ public class AuthController {
             }
     }
 
-    private boolean isAllowConnect(User user){
-        boolean isOutUsage = dataQuotaService.isOutOfUsage(user);
+    private boolean isAllowConnect(Client client){
+        boolean isOutUsage = dataQuotaService.isOutOfUsage(client) == 1;
         return !isOutUsage;
     }
 }

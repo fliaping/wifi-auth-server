@@ -1,5 +1,6 @@
 package com.fliaping.wifi.auth.domain.model;
 
+import com.sun.istack.internal.Nullable;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -7,9 +8,9 @@ import java.io.Serializable;
 
 /**
  * Created by Payne on 8/4/16.
+ * 连接到路由器的移动终端model
  */
 @Entity
-@Table(name = "client")
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,7 +20,7 @@ public class Client implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id",nullable = true)
+    @Nullable
     private User user;
 
     @NaturalId

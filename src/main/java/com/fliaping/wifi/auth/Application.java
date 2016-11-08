@@ -14,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class XpApplication extends SpringBootServletInitializer {
+public class Application extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(XpApplication.class);
+        return application.sources(Application.class);
     }
 
     public static void main(String[] args){
-        SpringApplication.run(XpApplication.class,args);
+        SpringApplication.run(Application.class,args);
     }
 }

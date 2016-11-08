@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * Created by Payne on 8/4/16.
+ * 连接会话
  */
 @Entity
 @Table(name = "session_s")

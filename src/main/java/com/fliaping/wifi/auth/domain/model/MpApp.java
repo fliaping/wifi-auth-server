@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by Payne on 8/16/16.
- * 公众号的相关信息
+ * 微信公众号
  */
 @Entity
 @Table(name = "mp_app")

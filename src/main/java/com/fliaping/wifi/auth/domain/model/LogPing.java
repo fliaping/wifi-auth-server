@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Created by Payne on 8/4/16.
+ * 路由器在线记录,记录每一次 ping 状态,定期删除
  */
 @Entity
 @Table(name = "log_ping")

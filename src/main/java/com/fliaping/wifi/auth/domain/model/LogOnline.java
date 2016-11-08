@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 /**
  * Created by Payne on 8/4/16.
+ * 终端的在线记录
  */
 @Entity
-@Table(name = "log_online")
 public class LogOnline implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -25,19 +25,15 @@ public class LogOnline implements Serializable{
 
     private long outgoing;
 
-    @Column(name = "begin_time")
     private long beginTime;
 
-    @Column(name = "update_time")
     private long updateTime;
 
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
     private Client client;
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "router_id")
     private Router router;
 
     public LogOnline(){}

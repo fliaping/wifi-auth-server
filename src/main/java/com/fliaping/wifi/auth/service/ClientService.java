@@ -7,5 +7,10 @@ import com.fliaping.wifi.auth.domain.model.Client;
  */
 public interface ClientService {
 
+    /**
+     * 判断终端是否在线
+     * @param client 终端
+     * @return 在线:true 不在线:false
+     */
     boolean isOnline(Client client);
 }

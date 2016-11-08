@@ -116,7 +116,7 @@ public class LoginController {
 
                 boolean isOline = clientService.isOnline(client);
                 //登录请求下,匿名设备,流量不会超额
-                boolean isOutOfUsage = client.getUser()==null ? false : dataQuotaService.isOutOfUsage(client.getUser());
+                boolean isOutOfUsage = client.getUser()==null && dataQuotaService.isOutOfUsage(client) == 1;
 
                 logger.warn("isOline:"+isOline+" isOutOfUsage:"+isOutOfUsage);
                 if( isOline && !isOutOfUsage) {  //若在线返回页面提示

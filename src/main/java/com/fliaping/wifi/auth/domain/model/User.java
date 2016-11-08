@@ -22,10 +22,6 @@ public class User implements Serializable{
     @GeneratedValue
     private long id;
 
-    private String username;
-
-    private String password;
-
     @Column(name = "wx_open_id",unique = true)
     private String wxOpenId;
 
@@ -56,24 +52,6 @@ public class User implements Serializable{
 
     public User setId(long id) {
         this.id = id;
-        return this;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public User setUsername(String username) {
-        this.username = username;
-        return this;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
         return this;
     }
 

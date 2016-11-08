@@ -1,5 +1,6 @@
 package com.fliaping.wifi.auth.service;
 
+import com.fliaping.wifi.auth.domain.model.Client;
 import com.fliaping.wifi.auth.domain.model.User;
 
 /**
@@ -7,5 +8,5 @@ import com.fliaping.wifi.auth.domain.model.User;
  */
 public interface DataQuotaService {
 
-    boolean isOutOfUsage(User user);
+    int isOutOfUsage(Client client);
 }
