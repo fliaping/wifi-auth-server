@@ -12,11 +12,10 @@ buildscript {
     }
 }
 
-apply plugin: 'jetty'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
