@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 /**
  * Created by Payne on 8/5/16.
+ * 用户的流量配额
  */
 @Entity
-@Table(name = "data_usage")
 public class DataQuota implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,6 +88,4 @@ public class DataQuota implements Serializable {
         this.once = once;
         return this;
     }
-
-
 }
