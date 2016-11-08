@@ -9,7 +9,6 @@ import java.io.Serializable;
  * 连接会话
  */
 @Entity
-@Table(name = "session_s")
 public class Session implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -20,13 +19,12 @@ public class Session implements Serializable{
 
 
     @OneToOne(optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id",unique = true)
+    @JoinColumn(unique = true)
     private Client client;
 
     private String ip;
 
     @ManyToOne
-    @JoinColumn(name = "router_id")
     private Router router;
 
     @Column(unique = true)
@@ -35,7 +33,6 @@ public class Session implements Serializable{
     @OneToOne
     private LogOnline logOnline;
 
-    @Column(name = "begin_time")
     private long beginTime;
 
     public Session(){}
