@@ -11,7 +11,6 @@ import java.util.List;
  * 微信公众号
  */
 @Entity
-@Table(name = "mp_app")
 public class MpApp implements Serializable{
 
     //ACCESS_TOKEN:  FN0reFfQb5-W2lWi5uNXVjeQzyk6Pj8Q17wCc-BEq_2zeqzlH1xbKnCT7MeJu5GsAzkuS2CrEZcr9fXQ_lV18gXiQjjIwpIxBKSzix1STZMVDFxcLO1_4OnpP_k8n9OIDVJhAAATLZ

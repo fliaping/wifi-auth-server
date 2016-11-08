@@ -19,7 +19,7 @@ public class UserControllor {
     @Autowired
     private UserRepository userRepository;
 
-    //UPDATE
+    /*//UPDATE
     @ApiOperation(value = "更新用户信息",notes = "只能更新username和passwd,其它字段由认证程序来完成")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id",value = "用户id",required = true,dataType = "Long",paramType = "path"),
@@ -28,10 +28,10 @@ public class UserControllor {
     @RequestMapping(value = "/id/{id}",method = RequestMethod.PUT)
     public User updateUser(@PathVariable Long id,@RequestBody User update){
         User user = findUserById(id);
-        user.setUsername(update.getUsername())
-                .setPassword(update.getPassword());
+        //user.setUsername(update.getUsername())
+         //       .setPassword(update.getPassword());
         return userRepository.save(user);
-    }
+    }*/
 
     //FIND
     @ApiOperation(value = "通过用户id来查找用户信息",notes = "",response = User.class)

@@ -10,6 +10,22 @@
     </annotationProcessing>
   </component>
   <component name="CopyrightManager" default="" />
+  <component name="DataSourceManagerImpl" format="xml" hash="4176146524">
+    <data-source source="LOCAL" name="MySQL - weixinWifi@localhost" uuid="eff6fc5e-8163-49ae-97e4-c15176e2de73">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/weixinWifi</jdbc-url>
+      <driver-properties>
+        <property name="autoReconnect" value="true" />
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+      </driver-properties>
+    </data-source>
+  </component>
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
@@ -171,6 +187,14 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - weixinWifi@localhost" uuid="eff6fc5e-8163-49ae-97e4-c15176e2de73">
+      <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>weixinWifi.*</schema-pattern>
+      <default-schemas>weixinWifi.*</default-schemas>
+    </data-source>
   </component>
   <component name="libraryTable">
     <library name="Gradle: antlr:antlr:2.7.7">

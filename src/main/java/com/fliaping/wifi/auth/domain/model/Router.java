@@ -11,7 +11,6 @@ import java.util.List;
  * Created by Payne on 8/4/16.
  */
 @Entity
-@Table(name = "router")
 public class Router implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -20,13 +19,13 @@ public class Router implements Serializable{
     @GeneratedValue
     private Long id;
 
-    @Column(name = "gw_id",nullable = false,unique = true)
+    @Column(nullable = false,unique = true)
     private String gwId;
 
-    @Column(name = "gw_address",columnDefinition = "varchar(15) default '192.168.1.1'")
+    @Column(columnDefinition = "varchar(15) default '192.168.1.1'")
     private String gwAddress;
 
-    @Column(name = "gw_port",columnDefinition = "int(5) default 2060")
+    @Column(columnDefinition = "int(5) default 2060")
     private int gwPort;
 
     private String name;
@@ -38,7 +37,6 @@ public class Router implements Serializable{
     private String bssid;
 
     @ManyToOne/*(cascade = CascadeType.ALL)*/ //注释掉之后,如果MpShop表中没有该记录不能添加成功
-    @JoinColumn(name = "mp_shop_id"/*,nullable = false*/)
     private MpShop mpShop;
 
     @OneToMany(mappedBy = "router")

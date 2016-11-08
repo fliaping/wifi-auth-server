@@ -1,6 +1,5 @@
 package com.fliaping.wifi.auth.domain.model;
 
-import com.sun.istack.internal.Nullable;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -20,7 +19,6 @@ public class Client implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Nullable
     private User user;
 
     @NaturalId

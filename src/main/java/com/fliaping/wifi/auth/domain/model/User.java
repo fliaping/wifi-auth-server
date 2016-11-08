@@ -13,7 +13,6 @@ import java.util.List;
  * Created by Payne on 8/4/16.
  */
 @Entity
-@Table(name = "user")
 public class User implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -22,16 +21,13 @@ public class User implements Serializable{
     @GeneratedValue
     private long id;
 
-    @Column(name = "wx_open_id",unique = true)
+    @Column(unique = true)
     private String wxOpenId;
 
-    @Column(name = "wx_tid")
     private String wxTid;
 
-    @Column(name = "last_login")
     private long lastLogin;
 
-    @Column(name = "login_count")
     private int loginCount;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)

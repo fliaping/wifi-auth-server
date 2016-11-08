@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User,Long>{
     User findById(long id);
 
 
-    User findByUsername(String username);
+    //User findByUsername(String username);
 
     User findByWxOpenId(String wxOpenId);
 }

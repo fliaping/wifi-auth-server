@@ -9,7 +9,6 @@ import java.util.Date;
  * 路由器在线记录,记录每一次 ping 状态,定期删除
  */
 @Entity
-@Table(name = "log_ping")
 public class LogPing implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -21,19 +20,14 @@ public class LogPing implements Serializable{
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
     private Router router;
 
-    @Column(name = "sys_uptime")
     private long sysUptime;
 
-    @Column(name = "sys_memfree")
     private long sysMemfree;
 
-    @Column(name = "sys_load")
     private float sysLoad;
 
-    @Column(name = "wifidog_uptime")
     private long wifidogUptime;
 
-    @Column(name = "update_time")
     private long updateTime;
 
     public LogPing(){}

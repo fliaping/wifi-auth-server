@@ -10,7 +10,6 @@ import java.io.Serializable;
  * 公众号的门店信息
  */
 @Entity
-@Table(name = "mp_shop")
 public class MpShop implements Serializable{
 
     @Id
@@ -23,7 +22,6 @@ public class MpShop implements Serializable{
     private String secretKey;
 
     @ManyToOne
-    @JoinColumn(name = "mp_app_id")
     private MpApp mpApp;
 
 
