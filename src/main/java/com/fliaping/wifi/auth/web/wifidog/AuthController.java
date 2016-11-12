@@ -1,5 +1,6 @@
 package com.fliaping.wifi.auth.web.wifidog;
 
+import com.fliaping.wifi.auth.api.v1.service.DataUsageService;
 import com.fliaping.wifi.auth.domain.model.Client;
 import com.fliaping.wifi.auth.domain.model.LogOnline;
 import com.fliaping.wifi.auth.domain.model.Session;
@@ -9,6 +10,7 @@ import com.fliaping.wifi.auth.domain.repository.LogOnlineRepository;
 import com.fliaping.wifi.auth.domain.repository.SessionRepository;
 import com.fliaping.wifi.auth.service.DataQuotaService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +39,9 @@ public class AuthController {
     private ClientRepository clientRepository;
 
     @Autowired
-    private DataQuotaService dataQuotaService;
+    private DataUsageService dataUsageService;
+
+    Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public void doGet(HttpServletRequest request,
@@ -50,50 +54,58 @@ public class AuthController {
                       @RequestParam(value = "outgoing",required = true) String outgoing,
                       @RequestParam(value = "gw_id",required = true) String gw_id){
 
+        logger.info("AUTH: "+request.getQueryString());
+        //responseAuth(response,true);
 
-        System.out.println("AUTH: "+request.getQueryString());
-
+        //根据token查找是否存在 session,login时即创建该 session
         Session session = sessionRepository.findByToken(token);
-        if (session == null) {  //认证时没有该session,表示程序出错
+        Client client ;
+        if (session == null || session.getClient() == null) {
+            logger.error("没有该session和 client 记录,表示程序出错");
             responseAuth(response,false);
             return;
+        }else {
+            client = session.getClient();
         }
 
         LogOnline logOnline = null;
         int stageInt = -1;
-        if("login".equals(stage)){
+        if("login".equals(stage)){ //登录认证要创建一条在线记录
             stageInt = 0;
-            Client client = clientRepository.findByMac(mac);
-            logOnline= new LogOnline();
+            logOnline = logOnlineRepository.findByToken(token);
+            logger.warn("auth login is null? : "+ logOnline);
+            logOnline = logOnline == null ? new LogOnline() : logOnline;
             logOnline.setToken(token)
                     .setClient(client)
                     .setRouter(session.getRouter())
                     .setBeginTime(System.currentTimeMillis())
                     .setIncoming(Long.parseLong(incoming))
                     .setOutgoing(Long.parseLong(outgoing));
-        }else if ("counters".equals(stage)){
+            logOnline = logOnlineRepository.save(logOnline);
+
+            //login认证,设置session信息
+            session.setIp(ip)
+                    .setLogOnline(logOnline);
+            sessionRepository.save(session);
+
+        }else if ("counters".equals(stage)){ //计数认证更新当前在线记录
             stageInt = 1;
             logOnline = logOnlineRepository.findByToken(token);
             if (logOnline != null){
                 logOnline.setIncoming(Long.parseLong(incoming))
                         .setOutgoing(Long.parseLong(outgoing))
                         .setUpdateTime(System.currentTimeMillis());
+                logOnline = logOnlineRepository.save(logOnline);
             }
-        }else {
+        }else { //未识别的认证类型
             responseAuth(response,false);
             return;
         }
+        // 判断是否流量用超,返回认证失败,并将session下线。
+        if(client != null && (stageInt == 0 || isAllowConnect(client))){  //检查是否允许连接,如果是 login 认证怎直接允许
 
-        logOnline = logOnlineRepository.save(logOnline);
+            logger.warn("auth allow, stageInt: "+stageInt+"  isAllow:"+isAllowConnect(client));
 
-        // TODO: 8/5/16 判断是否流量用超,返回认证失败,并将session下线。
-        Client client = session.getClient();
-        if(client != null && isAllowConnect(client)){  //检查允许连接
-            if (stageInt == 0) { //login认证,设置session信息
-                session.setIp(ip)
-                        .setLogOnline(logOnline);
-                sessionRepository.save(session);
-            }
             client.setEnable(true);
             clientRepository.save(client);
             //返回成功认证
@@ -105,7 +117,6 @@ public class AuthController {
                 client.setEnable(false);
                 clientRepository.save(client);
             }
-
             responseAuth(response,false);
             return;
         }
@@ -130,7 +141,7 @@ public class AuthController {
     }
 
     private boolean isAllowConnect(Client client){
-        boolean isOutUsage = dataQuotaService.isOutOfUsage(client) == 1;
+        boolean isOutUsage = dataUsageService.isOutOfUsage(client,false) < 1;
         return !isOutUsage;
     }
 }
