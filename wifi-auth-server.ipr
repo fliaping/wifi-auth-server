@@ -10,8 +10,8 @@
     </annotationProcessing>
   </component>
   <component name="CopyrightManager" default="" />
-  <component name="DataSourceManagerImpl" format="xml" hash="4176146524">
-    <data-source source="LOCAL" name="MySQL - weixinWifi@localhost" uuid="eff6fc5e-8163-49ae-97e4-c15176e2de73">
+  <component name="DataSourceManagerImpl" format="xml" hash="1974997958">
+    <data-source source="LOCAL" name="MySQL - weixinWifi@localhost" uuid="51bcd686-ee5c-49af-af84-98e1bdad1640">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
@@ -181,16 +181,19 @@
       <module fileurl="file://$PROJECT_DIR$/wifi-auth-server.iml" filepath="$PROJECT_DIR$/wifi-auth-server.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/resources/schema.sql" dialect="MySQL" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - weixinWifi@localhost" uuid="eff6fc5e-8163-49ae-97e4-c15176e2de73">
-      <secret-storage>memory</secret-storage>
+    <data-source name="MySQL - weixinWifi@localhost" uuid="51bcd686-ee5c-49af-af84-98e1bdad1640">
+      <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-pattern>weixinWifi.*</schema-pattern>
       <default-schemas>weixinWifi.*</default-schemas>
@@ -312,13 +315,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/dom4j/dom4j/1.6.1/a8e7149359255f43e0e5e3b1837948f9ed5861fb/dom4j-1.6.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE">
+    <library name="Gradle: io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spring.gradle/dependency-management-plugin/0.6.0.RELEASE/8be3924e1790c9cc089e6a96dbf2ed3c8fa0ed3/dependency-management-plugin-0.6.0.RELEASE.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spring.gradle/dependency-management-plugin/0.6.1.RELEASE/46cb985239502be3dcb94e0df45f797804e95fb8/dependency-management-plugin-0.6.1.RELEASE.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spring.gradle/dependency-management-plugin/0.6.0.RELEASE/7575ebe812e9988d7eff563ab046fab34a13d7c5/dependency-management-plugin-0.6.0.RELEASE-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spring.gradle/dependency-management-plugin/0.6.1.RELEASE/d324f1dab8d15e9e55507d9981de9e2b6f0b1c78/dependency-management-plugin-0.6.1.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: io.springfox:springfox-core:2.5.0">
@@ -420,13 +423,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/7d49b53caed9bd81d172807c3e096d24f3c57090/validation-api-1.1.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: junit:junit:4.11">
+    <library name="Gradle: junit:junit:4.12">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.11/4e031bb61df09069aeb2bffb4019e7a5034a4ee0/junit-4.11.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.11/28e0ad201304e4a4abf999ca0570b7cffc352c3c/junit-4.11-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/a6c32b40bf3d76eca54e3c601e5d1470c86fcdfa/junit-4.12-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: mysql:mysql-connector-java:6.0.3">
@@ -726,15 +729,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/f285ac123f201fb4b028bac556928d7cf527ef48/slf4j-api-1.7.21-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.slf4j:slf4j-simple:1.7.20">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-simple/1.7.20/c554734bbc4ab98ae705e28ff5771e8da568111/slf4j-simple-1.7.20.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-simple/1.7.20/8328067d273b9081dcd2cca8a7c9ffa90be02831/slf4j-simple-1.7.20-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.springframework.boot:spring-boot-autoconfigure:1.4.0.BUILD-SNAPSHOT">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/1.4.0.BUILD-SNAPSHOT/3a078cd3cee3801eb477f7c045896d289ad82f37/spring-boot-autoconfigure-1.4.0.BUILD-SNAPSHOT.jar!/" />
@@ -744,13 +738,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/1.4.0.BUILD-SNAPSHOT/50f27b53c57d1c2befb64de3aaf48930bdb9743d/spring-boot-autoconfigure-1.4.0.BUILD-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE">
+    <library name="Gradle: org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-gradle-plugin/1.4.0.RELEASE/35f6578f2434a89b97f14599a998f7bca709443b/spring-boot-gradle-plugin-1.4.0.RELEASE.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-gradle-plugin/1.4.2.RELEASE/7516953b9d2cc1588c686660b488285795de240b/spring-boot-gradle-plugin-1.4.2.RELEASE.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-gradle-plugin/1.4.0.RELEASE/c4238bfabdb5d284e08afad43b0f33b6b2f9d9d1/spring-boot-gradle-plugin-1.4.0.RELEASE-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-gradle-plugin/1.4.2.RELEASE/c1b130a3d892f53d1bae979cda008cbe0a90964d/spring-boot-gradle-plugin-1.4.2.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.springframework.boot:spring-boot-loader-tools:1.4.0.BUILD-SNAPSHOT">
@@ -771,13 +765,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-aop/1.4.0.BUILD-SNAPSHOT/a84516873bf76ea031d1806322564fffb20676ca/spring-boot-starter-aop-1.4.0.BUILD-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.springframework.boot:spring-boot-starter-data-jpa:1.4.0.RELEASE">
+    <library name="Gradle: org.springframework.boot:spring-boot-starter-data-jpa:1.4.2.RELEASE">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/1.4.0.RELEASE/d373fd566589910cdde69ca3b9de79c433eb29dd/spring-boot-starter-data-jpa-1.4.0.RELEASE.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/1.4.2.RELEASE/b74a1318032bb187ecb7511c18cb93753c5a5154/spring-boot-starter-data-jpa-1.4.2.RELEASE.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/1.4.0.RELEASE/9a9ec7d6196c316bff91d941ec397da84e6ad541/spring-boot-starter-data-jpa-1.4.0.RELEASE-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/1.4.2.RELEASE/556c790978216f98a1448a13cd1ab87faf2c218c/spring-boot-starter-data-jpa-1.4.2.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.springframework.boot:spring-boot-starter-jdbc:1.4.0.BUILD-SNAPSHOT">
@@ -798,22 +792,22 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-logging/1.4.0.BUILD-SNAPSHOT/7d54439a9807b2a2d979d915cfa9b719f82367fd/spring-boot-starter-logging-1.4.0.BUILD-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE">
+    <library name="Gradle: org.springframework.boot:spring-boot-starter-test:1.4.2.RELEASE">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-test/1.4.0.RELEASE/8960b7357acd9819bc357fe96a9768a9fb010ccf/spring-boot-starter-test-1.4.0.RELEASE.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-test/1.4.2.RELEASE/564b798522d811461ce6c8792c063ae2308898f8/spring-boot-starter-test-1.4.2.RELEASE.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-test/1.4.0.RELEASE/4123e536b861b1242258f3462e68dad126bb0b70/spring-boot-starter-test-1.4.0.RELEASE-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-test/1.4.2.RELEASE/d30ff5f0ba69369762c237db47f15fcaba95e3c4/spring-boot-starter-test-1.4.2.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.springframework.boot:spring-boot-starter-thymeleaf:1.4.0.RELEASE">
+    <library name="Gradle: org.springframework.boot:spring-boot-starter-thymeleaf:1.4.2.RELEASE">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-thymeleaf/1.4.0.RELEASE/1b830e4a75516582fe76b673ff62b7e338c79056/spring-boot-starter-thymeleaf-1.4.0.RELEASE.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-thymeleaf/1.4.2.RELEASE/afaca73697e5ae7b474412a2d4f96b9c705cc082/spring-boot-starter-thymeleaf-1.4.2.RELEASE.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-thymeleaf/1.4.0.RELEASE/1d843d90650c26ea6c9c94b3c1e2c2629bef8c82/spring-boot-starter-thymeleaf-1.4.0.RELEASE-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-thymeleaf/1.4.2.RELEASE/8e8c58b3825432d2e123456e7099a5b91d9b97fd/spring-boot-starter-thymeleaf-1.4.2.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:1.4.0.BUILD-SNAPSHOT">
@@ -825,13 +819,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-tomcat/1.4.0.BUILD-SNAPSHOT/49f3df1ab121f7e9bb2743c3cf954bb38ff71402/spring-boot-starter-tomcat-1.4.0.BUILD-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.springframework.boot:spring-boot-starter-web:1.4.0.RELEASE">
+    <library name="Gradle: org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-web/1.4.0.RELEASE/bcefa854b75a7e0bcf612bfbe030bdcb05c9da82/spring-boot-starter-web-1.4.0.RELEASE.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-web/1.4.2.RELEASE/7145c258f8fba4067f9e3880fad23586c9b8ff10/spring-boot-starter-web-1.4.2.RELEASE.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-web/1.4.0.RELEASE/4d23db84cac2cfde92b38cf85c1d721fae19bdd5/spring-boot-starter-web-1.4.0.RELEASE-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-web/1.4.2.RELEASE/a18cc78388170712a581d2d645f7871aff2adae8/spring-boot-starter-web-1.4.2.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.springframework.boot:spring-boot-starter:1.4.0.BUILD-SNAPSHOT">

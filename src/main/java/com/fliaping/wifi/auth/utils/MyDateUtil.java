@@ -2,6 +2,7 @@ package com.fliaping.wifi.auth.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -44,4 +45,19 @@ public class MyDateUtil {
         return string2Data(chinaFormatDate).getTime();
     }
 
+    public static Date[] getSpanTime(String type){
+        Calendar calendar = Calendar.getInstance();
+        Date endtime = calendar.getTime();
+
+        calendar.set(Calendar.SECOND,0);
+        switch (type){
+            case "year": calendar.set(Calendar.MONTH,0);
+            case "month" : calendar.set(Calendar.DAY_OF_MONTH,0);
+            case "day" : calendar.set(Calendar.HOUR_OF_DAY,0);
+            case "hour": calendar.set(Calendar.MINUTE,0);
+        }
+
+        Date starttime = calendar.getTime();
+        return new Date[]{starttime,endtime};
+    }
 }

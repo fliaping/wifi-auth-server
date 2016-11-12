@@ -2,10 +2,10 @@ package com.fliaping.wifi.auth.api.v1.controllor;
 
 import com.fliaping.wifi.auth.domain.model.DataQuota;
 import com.fliaping.wifi.auth.domain.repository.DataQuotaRepository;
-import com.mysql.cj.fabric.xmlrpc.base.Data;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +19,10 @@ public class DataQuotaControllor {
     @Autowired
     private DataQuotaRepository dataQuotaRepository;
 
+    Logger logger = Logger.getLogger(this.getClass());
+
     //UPDATE
-    @ApiOperation(value = "按照用户id查看配额",notes = "")
+    @ApiOperation(value = "按照用户id更新配额",notes = "")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid",value = "用户id",required = true,dataType = "Long",paramType = "path"),
             @ApiImplicitParam(name = "dataQuota",value = "DataQuota实体",required = true,dataType = "DataQuota")
@@ -29,11 +31,11 @@ public class DataQuotaControllor {
     @RequestMapping(value = "/uid/{uid}",method = RequestMethod.PUT)
     public DataQuota updateByUserId(@PathVariable Long uid, @RequestBody DataQuota update){
         DataQuota dataQuota = findByUserId(uid);
-        dataQuota.setMonthly(update.getMonthly())
-                .setDaily(update.getDaily())
+        dataQuota.setMonth(update.getMonth())
+                .setDay(update.getDay())
                 .setOnce(update.getOnce())
                 .setTotal(update.getTotal());
-        return dataQuotaRepository.save(dataQuota);
+        return dataQuotaRepository.saveAndFlush(dataQuota);
     }
 
 

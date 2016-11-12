@@ -18,7 +18,7 @@ public class Client implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user;
 
     @NaturalId

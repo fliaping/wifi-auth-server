@@ -52,4 +52,6 @@ public interface LogOnlineRepository extends JpaRepository<LogOnline,Long> {
     @Query("select sum(c.outgoing) from LogOnline as c where c.router.id = ?1 and c.updateTime >= ?2 and c.updateTime <= ?3")
     Long getOutgoingByRouterId(Long client_id,Long start,Long end);
 
+
+
 }

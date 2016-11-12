@@ -60,15 +60,16 @@ public class MpShopController {
     @ApiOperation(value = "通过店铺id获得店铺信息",notes = "")
     @ApiImplicitParam(name = "shopId",value = "店铺id",required = true,dataType = "String",paramType = "path")
     @RequestMapping(value = "/{shopId}",method = RequestMethod.GET)
-    public MpShop findMpShop(@PathVariable String shopId){
+    public MpShop findMpShopByShopId(@PathVariable String shopId){
         return mpShopRepository.findOne(shopId);
     }
 
-    @ApiOperation(value = "获取店铺列表",notes = "")
+    @ApiOperation(value = "根据公众号id获取店铺列表",notes = "")
+    @ApiImplicitParam(name = "shopId",value = "店铺id",required = true,dataType = "String",paramType = "path")
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public List<MpShop> findMpShop(){
+    public List<MpShop> findMpShopByAppId(@PathVariable String appId){
         // TODO: 8/18/16 分页查询
-        return mpShopRepository.findAll();
+        return mpShopRepository.findByMpApp_AppId(appId);//mpShopRepository.findAll();
     }
 
 

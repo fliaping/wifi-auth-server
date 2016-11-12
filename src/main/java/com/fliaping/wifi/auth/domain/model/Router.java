@@ -36,7 +36,9 @@ public class Router implements Serializable{
 
     private String bssid;
 
+    //公众号门店
     @ManyToOne/*(cascade = CascadeType.ALL)*/ //注释掉之后,如果MpShop表中没有该记录不能添加成功
+    @JoinColumn(nullable = false)
     private MpShop mpShop;
 
     @OneToMany(mappedBy = "router")

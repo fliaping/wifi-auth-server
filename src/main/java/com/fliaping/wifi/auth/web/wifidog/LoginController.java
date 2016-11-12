@@ -1,11 +1,9 @@
 package com.fliaping.wifi.auth.web.wifidog;
 
+import com.fliaping.wifi.auth.api.v1.service.DataUsageService;
 import com.fliaping.wifi.auth.domain.model.*;
 import com.fliaping.wifi.auth.domain.repository.*;
 import com.fliaping.wifi.auth.service.ClientService;
-import com.fliaping.wifi.auth.service.ClientServiceImpl;
-import com.fliaping.wifi.auth.service.DataQuotaService;
-import com.fliaping.wifi.auth.service.DataQuotaServiceImpl;
 import com.fliaping.wifi.auth.utils.CodecUtil;
 import com.fliaping.wifi.auth.domain.WeixinTicket;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,7 +38,7 @@ public class LoginController {
     private ClientService clientService;
 
     @Autowired
-    private DataQuotaService dataQuotaService;
+    private DataUsageService dataUsageService;
 
     @Autowired
     private Environment environment;
@@ -77,14 +74,14 @@ public class LoginController {
 
             //获取微信参数
             MpShop mpShop = router.getMpShop();
-            Assert.notNull(mpShop,"this router no belonged MpShop ,please check!!");
+            //this router have no belonged MpShop ,please check!!
+            if (mpShop == null) return "routerUnconfig";
             SHOP_ID = mpShop.getShopId();
             SECRET_KEY = mpShop.getSecretKey();
             MpApp mpApp = mpShop.getMpApp();
-            Assert.notNull(mpShop,"this router no belonged MpShop ,please check!!");
+            if (mpApp == null) return "routerUnconfig";
             APP_ID = mpApp.getAppId();
             AUTH_URL = mpApp.getAuthUrl();
-
 
             logger.info("router update");
         }
@@ -108,23 +105,44 @@ public class LoginController {
 
                 logger.warn("存在该设备的会话");
 
-                LogOnline logOnline = null;
-                long fromLastDuration =   (logOnline = session.getLogOnline()) != null ?
-                        System.currentTimeMillis() - logOnline.getUpdateTime() :
-                        Long.MAX_VALUE;
-
-
                 boolean isOline = clientService.isOnline(client);
-                //登录请求下,匿名设备,流量不会超额
-                boolean isOutOfUsage = client.getUser()==null && dataQuotaService.isOutOfUsage(client) == 1;
+                //登录请求下,匿名设备,流量设置为不超额
+                int isOutOfUsage = 1;
+                if (client.getUser()==null){
+                    isOutOfUsage = 1;
+                }else {
+                    isOutOfUsage = dataUsageService.isOutOfUsage(client,true);
+                    logger.error("有名设备,client:" + client.getId()+" user:"+client.getUser().getId());
+                }
 
+                //int isOutOfUsage = client.getUser()!=null ? dataQuotaService.isOutOfUsage(client) : 1;
                 logger.warn("isOline:"+isOline+" isOutOfUsage:"+isOutOfUsage);
-                if( isOline && !isOutOfUsage) {  //若在线返回页面提示
+
+                //处理流量超额的情况
+                if (isOutOfUsage < 1){
+                    long clientIncoming[] = {0,0,0,0};
+                    long clientOutgoing[] = {0,0,0,0};
+                    long userIncoming[] = {0,0,0};
+                    long userOutgoing[] = {0,0,0};
+
+                    dataUsageService.getClientUsage(client,clientIncoming,clientOutgoing);
+                    dataUsageService.getUserUsage(client.getUser(),userIncoming,userOutgoing);
+                    DataQuota quota = dataUsageService.getQuota(client);
+
+                    model.addAttribute("clientIncoming",clientIncoming);
+                    model.addAttribute("clientOutgoing",clientOutgoing);
+                    model.addAttribute("userIncoming",userIncoming);
+                    model.addAttribute("userOutgoing",userIncoming);
+                    model.addAttribute("quota",quota);
+                    logger.warn("once:"+quota.getOnce()+" day:"+quota.getDay()+" month:"+quota.getMonth()+" total:"+quota.getTotal() );
+                    return "outOfUsage";
+                }
+
+                if(isOline) {  //在线且流量未超额
                     logger.warn("在线返回页面提示");
                     return "youAlreadyOnline";
-                }else {  //不在线取得之前登陆信息
-                    // TODO: 8/8/16 取得之前的流量使用信息。 可以通过rsetful接口获取
-                    logger.warn("设备不在线或流量用光");
+                }else {  //设备不在线
+                    logger.warn("设备不在线");
                     client.setFirstUrl(url);
 
                     long expire = session.getBeginTime() + 1*60*1000;
@@ -138,7 +156,7 @@ public class LoginController {
                             .setIp(ip)
                             .setBeginTime(System.currentTimeMillis());
                 }
-            }else { //不存在该设备会话
+            }else { //不存在该设备会话则创建新会话
                 logger.warn("不存在该设备会话");
                 session = new Session(client,router,token);
                 session.setRouter(router)
@@ -170,7 +188,6 @@ public class LoginController {
         String ssid = router.getSsid();
         String bssid = router.getBssid();
 
-
         long timestamp = System.currentTimeMillis();
         WeixinTicket weixinTicket = new WeixinTicket(APP_ID , extend  ,timestamp, SHOP_ID , AUTH_URL , mac , ssid , bssid , SECRET_KEY);
 
@@ -186,8 +203,7 @@ public class LoginController {
         model.addAttribute("ssid",weixinTicket.getSsid());
         model.addAttribute("bssid",weixinTicket.getBssid());
 
-
-        return "weixinPortal";
+        return "weixinPortal2";
     }
 
 

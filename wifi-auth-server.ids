@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - weixinWifi@localhost" uuid="51bcd686-ee5c-49af-af84-98e1bdad1640">
+    <database-info product="MySQL" version="5.7.15" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="weixinWifi"/>
+      <table id="2" parent="1" name="client"/>
+      <table id="3" parent="1" name="data_quota"/>
+      <table id="4" parent="1" name="log_online"/>
+      <table id="5" parent="1" name="log_ping"/>
+      <table id="6" parent="1" name="mp_app"/>
+      <table id="7" parent="1" name="mp_shop"/>
+      <table id="8" parent="1" name="router"/>
+      <table id="9" parent="1" name="session"/>
+      <table id="10" parent="1" name="user"/>
+      <column id="11" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="12" parent="2" name="enable">
+        <mandatory>1</mandatory>
+        <data-type>bit(1)</data-type>
+      </column>
+      <column id="13" parent="2" name="first_url">
+        <data-type>varchar(1024)</data-type>
+      </column>
+      <column id="14" parent="2" name="mac">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="15" parent="2" name="user_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="16" parent="2" name="FKk1fi84oi1yyuswr40h38kjy1s">
+        <columns>user_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="17" parent="2" name="UK_giud2og02puttc862o04q1w59">
+        <columns>mac</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="18" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="19" parent="2" name="UK_giud2og02puttc862o04q1w59">
+        <columns>mac</columns>
+        <underlying-index>UK_giud2og02puttc862o04q1w59</underlying-index>
+      </key>
+      <foreign-key id="20" parent="2" name="FKk1fi84oi1yyuswr40h38kjy1s">
+        <columns>user_id</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="21" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="22" parent="3" name="day">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="23" parent="3" name="month">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="24" parent="3" name="once">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="25" parent="3" name="total">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="26" parent="3" name="user_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="27" parent="3" name="UK_m1ao0qxpeecxm099mwems036f">
+        <columns>user_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="28" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="29" parent="3" name="UK_m1ao0qxpeecxm099mwems036f">
+        <columns>user_id</columns>
+        <underlying-index>UK_m1ao0qxpeecxm099mwems036f</underlying-index>
+      </key>
+      <foreign-key id="30" parent="3" name="FK9md2otler8ka1llqmna3f2eyc">
+        <columns>user_id</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="31" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="32" parent="4" name="begin_time">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="33" parent="4" name="incoming">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="34" parent="4" name="outgoing">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="35" parent="4" name="token">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="36" parent="4" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="37" parent="4" name="client_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="38" parent="4" name="router_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="39" parent="4" name="FK22rtongf7vxcm3ohn63t5prjp">
+        <columns>client_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="40" parent="4" name="FKma69yxofsbwb8wl99hsuya8b4">
+        <columns>router_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="41" parent="4" name="UK_jex46vaalwwqtmora8uuwdn04">
+        <columns>token</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="42" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="43" parent="4" name="UK_jex46vaalwwqtmora8uuwdn04">
+        <columns>token</columns>
+        <underlying-index>UK_jex46vaalwwqtmora8uuwdn04</underlying-index>
+      </key>
+      <foreign-key id="44" parent="4" name="FK22rtongf7vxcm3ohn63t5prjp">
+        <columns>client_id</columns>
+        <ref-key>~.client.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="45" parent="4" name="FKma69yxofsbwb8wl99hsuya8b4">
+        <columns>router_id</columns>
+        <ref-key>~.router.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="46" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="47" parent="5" name="sys_load">
+        <mandatory>1</mandatory>
+        <data-type>float</data-type>
+      </column>
+      <column id="48" parent="5" name="sys_memfree">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="49" parent="5" name="sys_uptime">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="50" parent="5" name="update_time">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="51" parent="5" name="wifidog_uptime">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="52" parent="5" name="router_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="53" parent="5" name="FKd5rl5v21g3btlqx4adhj9gi3m">
+        <columns>router_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="54" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="55" parent="5" name="FKd5rl5v21g3btlqx4adhj9gi3m">
+        <columns>router_id</columns>
+        <ref-key>~.router.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="56" parent="6" name="app_id">
+        <mandatory>1</mandatory>
+        <data-type>varchar(512)</data-type>
+      </column>
+      <column id="57" parent="6" name="access_token">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="58" parent="6" name="app_secret">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="59" parent="6" name="auth_url">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="60" parent="6" name="name">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="61" parent="6" name="PRIMARY">
+        <columns>app_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="62" parent="7" name="shop_id">
+        <mandatory>1</mandatory>
+        <data-type>varchar(512)</data-type>
+      </column>
+      <column id="63" parent="7" name="name">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="64" parent="7" name="secret_key">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="65" parent="7" name="mp_app_app_id">
+        <mandatory>1</mandatory>
+        <data-type>varchar(512)</data-type>
+      </column>
+      <index id="66" parent="7" name="FK2ebjto750g8ltranutun8kkcd">
+        <columns>mp_app_app_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="67" parent="7" name="PRIMARY">
+        <columns>shop_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="68" parent="7" name="FK2ebjto750g8ltranutun8kkcd">
+        <columns>mp_app_app_id</columns>
+        <ref-key>~.mp_app.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="69" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="70" parent="8" name="bssid">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="71" parent="8" name="enable">
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="72" parent="8" name="gw_address">
+        <data-type>varchar(15)</data-type>
+        <default-expression>&apos;192.168.1.1&apos;</default-expression>
+      </column>
+      <column id="73" parent="8" name="gw_id">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="74" parent="8" name="gw_port">
+        <data-type>int(5)</data-type>
+        <default-expression>&apos;2060&apos;</default-expression>
+      </column>
+      <column id="75" parent="8" name="name">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="76" parent="8" name="remark">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="77" parent="8" name="ssid">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="78" parent="8" name="last_ping_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="79" parent="8" name="mp_shop_shop_id">
+        <mandatory>1</mandatory>
+        <data-type>varchar(512)</data-type>
+      </column>
+      <index id="80" parent="8" name="FK41uck9naf8j91oyv2ayl2uch1">
+        <columns>last_ping_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="81" parent="8" name="FKaucpdbwefh3pddwo69w7pj9g4">
+        <columns>mp_shop_shop_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="82" parent="8" name="UK_hiepr3a9vug4iumpxx5aw2n5m">
+        <columns>gw_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="83" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="84" parent="8" name="UK_hiepr3a9vug4iumpxx5aw2n5m">
+        <columns>gw_id</columns>
+        <underlying-index>UK_hiepr3a9vug4iumpxx5aw2n5m</underlying-index>
+      </key>
+      <foreign-key id="85" parent="8" name="FK41uck9naf8j91oyv2ayl2uch1">
+        <columns>last_ping_id</columns>
+        <ref-key>~.log_ping.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="86" parent="8" name="FKaucpdbwefh3pddwo69w7pj9g4">
+        <columns>mp_shop_shop_id</columns>
+        <ref-key>~.mp_shop.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="87" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="88" parent="9" name="begin_time">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="89" parent="9" name="ip">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="90" parent="9" name="token">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="91" parent="9" name="client_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="92" parent="9" name="log_online_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="93" parent="9" name="router_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="94" parent="9" name="FK4nyq5iq4isdti8humd481vc07">
+        <columns>router_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="95" parent="9" name="FKnsubn13fv0in9ty68272uf0gl">
+        <columns>log_online_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="96" parent="9" name="UK_99a8wt1ryupsm3bw11qtj7oo1">
+        <columns>token</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="97" parent="9" name="UK_rxq1k7s8s90bkxmhqi1bybfxc">
+        <columns>client_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="98" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="99" parent="9" name="UK_99a8wt1ryupsm3bw11qtj7oo1">
+        <columns>token</columns>
+        <underlying-index>UK_99a8wt1ryupsm3bw11qtj7oo1</underlying-index>
+      </key>
+      <key id="100" parent="9" name="UK_rxq1k7s8s90bkxmhqi1bybfxc">
+        <columns>client_id</columns>
+        <underlying-index>UK_rxq1k7s8s90bkxmhqi1bybfxc</underlying-index>
+      </key>
+      <foreign-key id="101" parent="9" name="FK4nyq5iq4isdti8humd481vc07">
+        <columns>router_id</columns>
+        <ref-key>~.router.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="102" parent="9" name="FKg09qw82y5cwjr1hb4fpcgab7c">
+        <columns>client_id</columns>
+        <ref-key>~.client.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="103" parent="9" name="FKnsubn13fv0in9ty68272uf0gl">
+        <columns>log_online_id</columns>
+        <ref-key>~.log_online.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="104" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="105" parent="10" name="enable">
+        <mandatory>1</mandatory>
+        <data-type>bit(1)</data-type>
+        <default-expression>b&apos;0&apos;</default-expression>
+      </column>
+      <column id="106" parent="10" name="last_login">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="107" parent="10" name="login_count">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="108" parent="10" name="wx_open_id">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="109" parent="10" name="wx_tid">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="110" parent="10" name="UK_t8tbwelrnviudxdaggwr1kd9b">
+        <columns>wx_open_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="111" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="112" parent="10" name="UK_t8tbwelrnviudxdaggwr1kd9b">
+        <columns>wx_open_id</columns>
+        <underlying-index>UK_t8tbwelrnviudxdaggwr1kd9b</underlying-index>
+      </key>
+    </database-model>
+  </data-source>
+</component>

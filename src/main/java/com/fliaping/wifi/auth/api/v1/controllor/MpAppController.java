@@ -31,7 +31,7 @@ public class MpAppController {
 
     //DELETE
     @ApiOperation(value = "删除一个公众号",notes = "")
-    @ApiImplicitParam(name = "appid",value = "公众号id",required = true,dataType = "String",paramType = "path")
+    @ApiImplicitParam(name = "appId",value = "公众号id",required = true,dataType = "String",paramType = "path")
     @RequestMapping(value = "/{appId}",method = RequestMethod.DELETE)
     public String deleteMpApp(@PathVariable String appId){
         mpAppRepository.delete(appId);

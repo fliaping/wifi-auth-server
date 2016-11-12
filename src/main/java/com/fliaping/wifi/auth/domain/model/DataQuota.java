@@ -1,5 +1,6 @@
 package com.fliaping.wifi.auth.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -18,15 +19,16 @@ public class DataQuota implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore
     @NaturalId
     @OneToOne
     private User user;
 
-    private long monthly;
+    private long month;
 
     private long total = 10 * 1024 * 1024;
 
-    private long daily;
+    private long day;
 
     private long once;
 
@@ -53,12 +55,12 @@ public class DataQuota implements Serializable {
         return this;
     }
 
-    public long getMonthly() {
-        return monthly;
+    public long getMonth() {
+        return month;
     }
 
-    public DataQuota setMonthly(long monthly) {
-        this.monthly = monthly;
+    public DataQuota setMonth(long monthly) {
+        this.month = monthly;
         return this;
     }
 
@@ -71,12 +73,12 @@ public class DataQuota implements Serializable {
         return this;
     }
 
-    public long getDaily() {
-        return daily;
+    public long getDay() {
+        return day;
     }
 
-    public DataQuota setDaily(long daily) {
-        this.daily = daily;
+    public DataQuota setDay(long daily) {
+        this.day = daily;
         return this;
     }
 

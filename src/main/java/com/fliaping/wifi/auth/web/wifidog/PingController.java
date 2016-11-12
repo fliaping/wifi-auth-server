@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 
 /**
@@ -49,16 +50,24 @@ public class PingController {
 
         Router router = routerRepository.findByGwId(gw_id);
 
+        long currentTime = System.currentTimeMillis();
         if (router != null){
             logPing.setRouter(router)
                     .setSysUptime(Long.parseLong(sys_uptime))
                     .setSysLoad(Float.parseFloat(sys_load))
                     .setWifidogUptime(Long.parseLong(wifidog_uptime))
-                    .setUpdateTime(System.currentTimeMillis());
+                    .setUpdateTime(currentTime);
 
             logPing  = logPingRepository.save(logPing); //取得当前一条logPing,并作为router的lastPing
             router.setLastPing(logPing).setEnable(true); //设置最后一ping,并设置为可用
             routerRepository.save(router);
+
+            //删除该路由一天前记录(1 * 24 * 60 * 60 * 1000)=86400000
+            long before = currentTime - 86400000L;
+
+            logPingRepository.deleteBeforeUpdateTime(before);
+
+
 
             logger.info("router saved :gw_id:"+router.getGwId());
 
@@ -71,7 +80,7 @@ public class PingController {
         }else {
             try {
                 PrintWriter out = response.getWriter();
-                out.print("this router haven't be registered");
+                out.print("this router haven't be registered \r\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }

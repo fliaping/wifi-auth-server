@@ -8,5 +8,4 @@ import com.fliaping.wifi.auth.domain.model.User;
  */
 public interface DataQuotaService {
 
-    int isOutOfUsage(Client client);
 }

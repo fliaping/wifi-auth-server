@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="zh-CN">
+    <meta charset="UTF-8"/>
+    <title>微信连Wi-Fi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+
+</head>
+
+<body >
+
+<h1>out of usage</h1>
+设备用量: <br/>
+
+当次流量:<span th:text="${clientIncoming[0]+clientOutgoing[0]}">0</span> &nbsp;&nbsp; 当次配额:<span th:text="${quota.getOnce()}">0</span> <br/>
+当天流量:<span th:text="${clientIncoming[1]+clientOutgoing[1]}">0</span> <br/>
+当月流量:<span th:text="${clientIncoming[2]+clientOutgoing[2]}">0</span> <br/>
+总流量:<span th:text="${clientIncoming[3]+clientOutgoing[3]}">0</span> <br/>
+
+用户用量:<br/>
+
+
+当天流量:<span th:text="${userIncoming[0]+userOutgoing[0]}">0</span>  &nbsp;&nbsp; 当天配额:<span th:text="${quota.getDay()}">0</span> <br/>
+当月流量:<span th:text="${userIncoming[1]+userOutgoing[1]}">0</span>  &nbsp;&nbsp; 当月配额:<span th:text="${quota.getMonth()}">0</span> <br/>
+总流量:<span th:text="${userIncoming[2]+userOutgoing[2]}">0</span>  &nbsp;&nbsp; 总配额:<span th:text="${quota.getTotal()}">0</span>     <br/>
+
+
+
+</body>
+
+</html>

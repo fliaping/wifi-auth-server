@@ -51,7 +51,6 @@ public class WeixinAuthController {
 
         String token = extend;
 
-
         Session session = sessionRepository.findByToken(token);
 
         if (session == null){ //出错认证失败

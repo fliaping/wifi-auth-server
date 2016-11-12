@@ -21,7 +21,9 @@ public class MpShop implements Serializable{
 
     private String secretKey;
 
+    //公众号
     @ManyToOne
+    @JoinColumn(nullable = false)
     private MpApp mpApp;
 
 

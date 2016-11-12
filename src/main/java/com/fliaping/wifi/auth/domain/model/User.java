@@ -5,7 +5,6 @@ import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class User implements Serializable{
     @GeneratedValue
     private long id;
 
-    @Column(unique = true)
+    @NaturalId
     private String wxOpenId;
 
     private String wxTid;
@@ -30,17 +29,11 @@ public class User implements Serializable{
 
     private int loginCount;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private List<Client> clients;
 
-    @Column(columnDefinition = "boolean default false")
+    @ColumnDefault("false")
     private boolean enable;
-
-    public User(){}
-
-    public User(String wxOpenId){
-        this.wxOpenId = wxOpenId;
-    }
 
     public long getId() {
         return id;
