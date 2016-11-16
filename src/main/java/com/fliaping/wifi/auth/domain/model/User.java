@@ -1,6 +1,7 @@
 package com.fliaping.wifi.auth.domain.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class User implements Serializable{
 
     private int loginCount;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Client> clients;
 

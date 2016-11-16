@@ -25,7 +25,7 @@ public class DataQuotaControllor {
     @ApiOperation(value = "按照用户id更新配额",notes = "")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid",value = "用户id",required = true,dataType = "Long",paramType = "path"),
-            @ApiImplicitParam(name = "dataQuota",value = "DataQuota实体",required = true,dataType = "DataQuota")
+            @ApiImplicitParam(name = "update",value = "DataQuota实体",required = true,dataType = "DataQuota")
     })
 
     @RequestMapping(value = "/uid/{uid}",method = RequestMethod.PUT)

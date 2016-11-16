@@ -30,10 +30,10 @@ public class Swagger2 {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("fliapingWifi认证服务器RESTful APIs")
+                .title("wifidog认证服务器RESTful APIs")
                 .description("基于wifidog开发")
-                .termsOfServiceUrl("http://blog.xvping.cn")
-                .contact(new Contact("Payne","blog.xvping.cn","xavierrpayne@gmail.com"))
+                .termsOfServiceUrl("https://blog.fliaping.com")
+                .contact(new Contact("Payne","https://blog.fliaping.com","xavierrpayne@gmail.com"))
                 .version("1.0")
                 .build();
     }

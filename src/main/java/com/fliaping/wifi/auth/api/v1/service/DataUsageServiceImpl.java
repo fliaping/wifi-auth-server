@@ -129,23 +129,23 @@ public class DataUsageServiceImpl implements DataUsageService {
         if (client == null) throw new RuntimeException("client shouldn't be null");
 
         User user = client.getUser();
-        if (user == null) return 1; //TODO:匿名设备,允许通行?
+        if (user == null) throw new RuntimeException("client haven't be bound to user");
 
-        long incoming[] = {0,0,0};
-        long outgoing[] = {0,0,0};
+        long userIncoming[] = {0,0,0};
+        long userOutgoing[] = {0,0,0};
 
         long[] once = new long[0];
         if (!ignoreOnce) once = getClientOnceUsage(client);
 
-        getUserUsage(user,incoming,outgoing); //该设备所属用户的用量
+        getUserUsage(user,userIncoming,userOutgoing); //该设备所属用户的用量
 
         DataQuota dataQuota = getQuota(user);
 
-        if (dataQuota.getTotal() > 0 && incoming[2]+outgoing[2] > dataQuota.getTotal()){ //总用量超出
+        if (dataQuota.getTotal() > 0 && userIncoming[2]+userOutgoing[2] > dataQuota.getTotal()){ //总用量超出
             return -3;
-        }else if (dataQuota.getMonth() > 0 && incoming[1]+outgoing[1] > dataQuota.getMonth()){ //当月用量超出
+        }else if (dataQuota.getMonth() > 0 && userIncoming[1]+userOutgoing[1] > dataQuota.getMonth()){ //当月用量超出
             return -2;
-        }else if (dataQuota.getDay() > 0 && incoming[0]+outgoing[0] > dataQuota.getDay()){ //当天用量超出
+        }else if (dataQuota.getDay() > 0 && userIncoming[0]+userOutgoing[0] > dataQuota.getDay()){ //当天用量超出
             return -1;
         }else if (dataQuota.getOnce() > 0 && once[0]+once[1] > dataQuota.getOnce()){ //当次用量超出
             if (ignoreOnce) return 1;
@@ -236,10 +236,10 @@ public class DataUsageServiceImpl implements DataUsageService {
     public long getUserUsage(User user, long incoming[], long outgoing[]){
 
 
-        if (user == null) throw new RuntimeException("get user Usage parm user is null");
+        if (user == null) throw new RuntimeException("get user Usage parameter : user is null");
         if (incoming.length!=3 || outgoing.length!=3) throw new RuntimeException("参数传递错误");
 
-        List<Client> clients = new ArrayList<Client>();
+        List<Client> clients = user.getClients();
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -250,19 +250,22 @@ public class DataUsageServiceImpl implements DataUsageService {
         long monthStart = calendar.getTimeInMillis();
         long now = System.currentTimeMillis();
 
+        Long tmp = null;
+
         for (Client client :
                 clients) {
             //当天流量统计
-            incoming[0] += logOnlineRepository.getIncomingByClientId(client.getId(), dayStart, now);
-            outgoing[0] += logOnlineRepository.getOutgoingByClientId(client.getId(), dayStart, now);
+            logger.error("user usage day:"+logOnlineRepository.getIncomingByClientId(client.getId(), dayStart, now));
+            incoming[0] += null == (tmp = logOnlineRepository.getIncomingByClientId(client.getId(), dayStart, now))?0:tmp;
+            outgoing[0] += null == (tmp = logOnlineRepository.getOutgoingByClientId(client.getId(), dayStart, now))?0:tmp;
 
             //当月流量统计
-            incoming[1] += logOnlineRepository.getIncomingByClientId(client.getId(), monthStart, now);
-            outgoing[1] += logOnlineRepository.getOutgoingByClientId(client.getId(), monthStart, now);
+            incoming[1] += null == (tmp = logOnlineRepository.getIncomingByClientId(client.getId(), monthStart, now))?0:tmp;
+            outgoing[1] += null == (tmp = logOnlineRepository.getOutgoingByClientId(client.getId(), monthStart, now))?0:tmp;
 
             //总流量统计
-            incoming[2] += logOnlineRepository.getIncomingByClientId(client.getId());
-            outgoing[2] += logOnlineRepository.getOutgoingByClientId(client.getId());
+            incoming[2] += null == (tmp = logOnlineRepository.getIncomingByClientId(client.getId()))?0:tmp;
+            outgoing[2] += null == (tmp = logOnlineRepository.getOutgoingByClientId(client.getId()))?0:tmp;
         }
         return incoming[0]+outgoing[0];
     }

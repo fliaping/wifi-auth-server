@@ -132,7 +132,7 @@ public class LoginController {
                     model.addAttribute("clientIncoming",clientIncoming);
                     model.addAttribute("clientOutgoing",clientOutgoing);
                     model.addAttribute("userIncoming",userIncoming);
-                    model.addAttribute("userOutgoing",userIncoming);
+                    model.addAttribute("userOutgoing",userOutgoing);
                     model.addAttribute("quota",quota);
                     logger.warn("once:"+quota.getOnce()+" day:"+quota.getDay()+" month:"+quota.getMonth()+" total:"+quota.getTotal() );
                     return "outOfUsage";

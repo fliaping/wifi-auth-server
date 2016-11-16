@@ -10,7 +10,7 @@
     </annotationProcessing>
   </component>
   <component name="CopyrightManager" default="" />
-  <component name="DataSourceManagerImpl" format="xml" hash="1974997958">
+  <component name="DataSourceManagerImpl" format="xml" hash="172262968">
     <data-source source="LOCAL" name="MySQL - weixinWifi@localhost" uuid="51bcd686-ee5c-49af-af84-98e1bdad1640">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>

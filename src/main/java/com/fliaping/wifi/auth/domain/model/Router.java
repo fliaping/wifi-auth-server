@@ -1,6 +1,7 @@
 package com.fliaping.wifi.auth.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -37,13 +38,16 @@ public class Router implements Serializable{
     private String bssid;
 
     //公众号门店
+    @JsonIgnore
     @ManyToOne/*(cascade = CascadeType.ALL)*/ //注释掉之后,如果MpShop表中没有该记录不能添加成功
     @JoinColumn(nullable = false)
     private MpShop mpShop;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "router")
     private List<Session> sessions;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private LogPing lastPing;
 

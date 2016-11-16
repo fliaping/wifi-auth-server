@@ -9,6 +9,7 @@ import java.io.Serializable;
  * 连接会话
  */
 @Entity
+@Table(name = "session_s")
 public class Session implements Serializable{
 
     private static final long serialVersionUID = 1L;
